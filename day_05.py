@@ -57,8 +57,8 @@ def combine_maps(maps_a: list[tuple[range, range]], maps_b: list[tuple[range, ra
         maps_a.append((range(start, stop), range(start, stop)))
 
     for dst_range_a, src_range_a in maps_a:
-        if overlaps := list(it.takewhile(lambda map_b: map_b[1].start < dst_range_a.stop,
-                                         it.dropwhile(lambda map_b: map_b[1].stop <= dst_range_a.start, maps_b))):
+        if overlaps := [map_b for map_b in maps_b
+                        if map_b[1].stop > dst_range_a.start and map_b[1].start < dst_range_a.stop]:
             if dst_range_c := range(dst_range_a.start, overlaps[0][1].start):
                 src_range_c = range(src_range_a.start, src_range_a.start + len(dst_range_c))
                 maps_c.append((dst_range_c, src_range_c))
