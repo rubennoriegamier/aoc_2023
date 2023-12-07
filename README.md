@@ -4,5 +4,5 @@ This repository contains my solutions in Python for [Advent of Code 2023](https:
 Python >= 3.12
 ## Execution
 ```
-python day_xx.py < day_xx.txt
+python day_xx.py < input.txt
 ```
