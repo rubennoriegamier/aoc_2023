@@ -1,5 +1,4 @@
 import fileinput
-from functools import reduce
 from itertools import pairwise
 
 
@@ -28,18 +27,8 @@ def part_1(histories: list[list[int]]) -> int:
     return sum(map(next_value, histories))
 
 
-def prev_value(history: list[int]) -> int:
-    values = []
-
-    while any(history):
-        values.append(history[0])
-        history = [b - a for a, b in pairwise(history)]
-
-    return reduce(lambda a, b: b - a, values[::-1])
-
-
 def part_2(histories: list[list[int]]) -> int:
-    return sum(map(prev_value, histories))
+    return sum(map(next_value, (history[::-1] for history in histories)))
 
 
 if __name__ == '__main__':

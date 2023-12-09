@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 
-from day_09 import parse_history, next_value, part_1, prev_value, part_2
+from day_09 import parse_history, next_value, part_1, part_2
 
 
 class TestDay09(TestCase):
@@ -18,11 +18,6 @@ class TestDay09(TestCase):
 
     def test_part_1(self):
         self.assertEqual(part_1(self._histories), 114)
-
-    def test_prev_value(self):
-        for history, prev_value_ in zip(self._histories, [-3, 0, 5]):
-            with self.subTest(item_type=history):
-                self.assertEqual(prev_value(history), prev_value_)
 
     def test_part_2(self):
         self.assertEqual(part_2(self._histories), 2)
