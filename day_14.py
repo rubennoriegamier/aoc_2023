@@ -33,7 +33,7 @@ def part_2(platform: list[str]) -> int:
 
     loads = []
 
-    for cycle in range(1_000_000_000):
+    for _ in range(1_000_000_000):
         # North
         free = [0] * len(platform[0])
 
