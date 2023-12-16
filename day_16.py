@@ -1,5 +1,8 @@
 import fileinput
 from collections import defaultdict
+from functools import partial
+from itertools import chain
+from multiprocessing import Pool
 
 
 def main():
@@ -71,10 +74,12 @@ def part_1(grid: list[str], start=(0, 0, '>')) -> int:
 
 
 def part_2(grid: list[str]) -> int:
-    return max(max(part_1(grid, (y, 0, '>')) for y in range(len(grid))),
-               max(part_1(grid, (0, x, 'v')) for x in range(len(grid[0]))),
-               max(part_1(grid, (y, len(grid[0]) - 1, '<')) for y in range(len(grid))),
-               max(part_1(grid, (len(grid) - 1, x, '^')) for x in range(len(grid[0]))))
+    with Pool() as pool:
+        return max(pool.map(partial(part_1, grid),
+                            chain(((y, 0, '>') for y in range(len(grid))),
+                                  ((0, x, 'v') for x in range(len(grid[0]))),
+                                  ((y, len(grid[0]) - 1, '<') for y in range(len(grid))),
+                                  ((len(grid) - 1, x, '^') for x in range(len(grid[0]))))))
 
 
 if __name__ == '__main__':
