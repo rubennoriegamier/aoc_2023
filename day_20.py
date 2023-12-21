@@ -76,7 +76,7 @@ class Circuit:
 
         return low, high
 
-    def find_rx(self):
+    def find_rx(self) -> int:
         rx_prev = next(mod for mod, outs in self._outs.items() if outs[0] == 'rx')
         rx_prev = [mod for mod, outs in self._outs.items() if outs[0] == rx_prev]
         result = 1
