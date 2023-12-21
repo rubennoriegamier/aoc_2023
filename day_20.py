@@ -2,7 +2,7 @@ import fileinput
 from collections import defaultdict, deque
 from itertools import count
 from math import lcm
-from operator import methodcaller
+from operator import methodcaller, mul
 
 
 def main():
@@ -107,15 +107,8 @@ class Circuit:
 
 def part_1(mods: list[str]) -> int:
     circuit = Circuit(mods)
-    total_low = 0
-    total_high = 0
 
-    for _ in range(1_000):
-        low, high = circuit.push_button()
-        total_low += low
-        total_high += high
-
-    return total_low * total_high
+    return mul(*map(sum, zip(*(circuit.push_button() for _ in range(1_000)))))
 
 
 def part_2(mods: list[str]) -> int:
